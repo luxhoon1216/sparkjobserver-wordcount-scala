@@ -19,4 +19,4 @@ spark-submit --class WordCount --jars build/libs/spark-wordcount-scala-0.0.1-SNA
 --master {master} spark-wordcount-scala-0.0.1-SNAPSHOT.jar {spark master} {input file name} {thread count}
 
 
-spark-submit --class WordCount --jars build/libs/spark-wordcount-scala-0.0.1-SNAPSHOT.jar --master local[4] spark-wordcount-scala-0.0.1-SNAPSHOT.jar local build.gradle 2
+spark-submit --class WordCount --jars build/libs/spark-wordcount-scala-0.0.1-SNAPSHOT.jar --master local[4] spark-wordcount-scala-0.0.1-SNAPSHOT.jar local build.gradle
