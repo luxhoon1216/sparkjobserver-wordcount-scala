@@ -1,22 +1,23 @@
-# spark-wordcount-scala
+# sparkjobserver-wordcount-scala
 
-Reference: http://www.datastax.com/dev/blog/accessing-cassandra-from-spark-in-java
+Reference: https://github.com/spark-jobserver/spark-jobserver
 
 
 ### Build
 ##### gradle clean build
 
-### Upload files to Spark server
-##### create spark-cassandra-java/ directory in spark server
-mkdir spark-wordcount-scala
-##### upload build/libs/spark-wordcount-scala-0.0.1-SNAPSHOT.jar
+### Run spark-jobserver
+Reference: https://github.com/spark-jobserver/spark-jobserver
 
-### run spark-submit
-##### go to spark-cassandra-java/ in spark server
-cd spark-wordcount-scala
-##### run spark-submit
-spark-submit --class WordCount --jars build/libs/spark-wordcount-scala-0.0.1-SNAPSHOT.jar \
---master {master} spark-wordcount-scala-0.0.1-SNAPSHOT.jar {spark master} {input file name} {thread count}
+### Run sparkjobserver-wordcount-scala
+#### Upload/Register jar file to job server
+curl --data-binary  @build/libs/sparkjobserver-wordcount-scala-0.0.1-SNAPSHOT.jar localhost:8090/jars/wordcount
+
+#### Run with new SparkContext
+curl -d "inputFile = $(pwd)/inputFile/hosts.txt" 'localhost:8090/jobs?appName=wordcount&classPath=WordCount&sync=true'
 
 
-spark-submit --class WordCount --jars build/libs/spark-wordcount-scala-0.0.1-SNAPSHOT.jar --master local[4] spark-wordcount-scala-0.0.1-SNAPSHOT.jar local build.gradle
+#### Run with persisted/shared SparkContext
+curl -d "" 'localhost:8090/contexts/shared-context?num-cpu-cores=4&memory-per-node=512m'
+
+curl -d "inputFile = $(pwd)/inputFile/hosts.txt" 'localhost:8090/jobs?appName=wordcount&classPath=WordCount&context=shared-context&sync=true'
