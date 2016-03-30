@@ -2,6 +2,9 @@ apply plugin: 'scala'
 apply plugin: 'eclipse'
 
 repositories{
+    maven {
+        url "https://dl.bintray.com/spark-jobserver/maven"
+    }
     mavenCentral()
     mavenLocal()
 }
@@ -17,8 +20,9 @@ jar {
 
 dependencies{
     compile 'org.slf4j:slf4j-api:1.7.5'
-    compile "org.scala-lang:scala-library:2.11.7"
+    compile "org.scala-lang:scala-library:2.10.6"
     compile 'org.apache.spark:spark-core_2.10:1.6.0'
+    compile 'spark.jobserver:job-server-api_2.10:0.6.1'
     testCompile "junit:junit:4.11"
 }
 
